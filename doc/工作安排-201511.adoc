@@ -1,0 +1,20 @@
+= 工作安排(2015-11)
+:author: chenjian <chenjian@gbcom.com.cn>
+:toc: left
+:icons:
+:numbered:
+
+== 2015-11-16
+* audit移植
+** lib库移植
+    
+TIP:    libdir应为需要存放的地址
+
+** 基础环境搭建
+    . audit -c /appfs/etc/audit.ini -f /var/log/audit.log
+    . 服务器搭建
+
+|===
+|服务器url  |username   |passwd 
+|===
+
