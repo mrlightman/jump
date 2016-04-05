@@ -1,6 +1,6 @@
 #!/bin/bash
 
 rm -f ~/.emacs.d ~/.spacemacs.d
-ln -s `pwd`/spacemacs ~/.emacs.d
 git clone https://github.com/syl20bnr/spacemacs
+ln -s `pwd`/spacemacs ~/.emacs.d
 ln -s `pwd` ~/.spacemacs.d

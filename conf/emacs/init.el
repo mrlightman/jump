@@ -31,7 +31,7 @@ values."
      asciidoc
      (org :variables
           org-enable-github-support t
-          org-directory "~/CloudStation/ORG")
+          org-directory "~/10-Work/40-Docs/10-OrgFile")
      (shell :variables
             shell-default-shell 'ansi-term
             shell-default-term-shell "/bin/zsh"
@@ -45,6 +45,7 @@ values."
      semantic
      gtags
      osx
+     ranger
      (chinese :variables chinese-enable-youdao-dict t)
      search-engine
      )
@@ -52,7 +53,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      bing-dict
+                                      xcscope
+                                      sr-speedbar
+                                      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -73,7 +78,8 @@ values."
    ;; variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
    ;; uses emacs key bindings for vim's insert mode, but otherwise leaves evil
    ;; unchanged. (default 'vim)
-   dotspacemacs-editing-style 'emacs
+   ;; dotspacemacs-editing-style 'emacs
+   dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -92,7 +98,14 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-light
                          spacemacs-dark
-                         )
+                        )
+    ;; dotspacemacs-themes '(leuven
+     ;;                      spacemacs-dark
+      ;;                     spacemacs-light
+       ;;                    solarized-light
+        ;;                   solarized-dark
+         ;;                  monokai
+          ;;                 zenburn)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -144,7 +157,7 @@ values."
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
    ;; Which-key frame position. Possible values are `right', `bottom' and
-   ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
+   
    ;; right; if there is insufficient space it displays it at the bottom.
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
@@ -154,7 +167,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup nil
+   dotspacemacs-fullscreen-at-startup t
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -207,13 +220,15 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (when (spacemacs/system-is-mac)
-    (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 13 16))
+      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 13 16))
   (setq c-default-style '((c-mode . "linux") (c++-mode . "linux")))
   (setq c-basic-offset 4)
   (setq-default tab-width 4)
   (global-pangu-spacing-mode nil)
 
   (evil-leader/set-key "oy" 'youdao-dictionary-search-at-point+)
+  (evil-leader/set-key "ob" 'bing-dict-brief)
+  ;; (global-set-key (kbd "C-x f1") 'bing-dict-brief)
 
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -228,20 +243,15 @@ layers configuration. You are free to put any user code."
      ))
   (setq org-plantuml-jar-path
         (expand-file-name "~/.spacemacs.d/plugins/plantuml.jar"))
+  (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
+  (setq mail-sources
+        '((pop :server "pop.gmail.com"
+               :port 995
+               :user "jschenjian@gmail.com"
+               :password "huake08chenjian"
+               :stream ssl)))
+
   )
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/CloudStation/GB/TODO.org"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+
