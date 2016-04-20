@@ -63,6 +63,31 @@ system("sysctl -w net.ipv4.conf.ppp0.rp_filter=0");
 system("sysctl -w net.ipv4.conf.ppp2.rp_filter=0");
 system("sysctl -w net.ipv4.conf.ppp3.rp_filter=0");
 #+END_SRC
+
+- pptp
+  - /etc/ppp/peer/vpn.pptp3 目录下 pptp 文件
+  
+  - option /appfs/etc/ppp/option.pptp
+  
+  - pppoe-setup username passwd
+  
+  - pon /poff
+
+- l2tp
+  - /appfs/etc/xl2tpd/xl2tpd.conf
+
+  - pppoptfile = /appfs/etc/xl2tpd/pppopt
+
+  - 配置用户名密码到 pppoptfile 中
+
+  - xl2tpd -c /appfs/etc/xl2tpd/xl2tpd.conf
+
+  - echo "c xx" >/var/run/xl2tpd/l2tp-control
+
+ 
+ 
+
+
 ** TODO 连连 ssh key 支持
 ** TODO 连连 php 脚本支持 redirect url
 ** TODO 连连中广视频业务
