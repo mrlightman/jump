@@ -34,6 +34,7 @@ Plugin 'a.vim'
 Plugin 'pydoc.vim'
 Plugin 'grep.vim'
 Plugin 'project.tar.gz'
+Plugin 'snipMate'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -196,11 +197,11 @@ let g:ctrlp_working_path_mode = 'ra'
 
 set clipboard=unnamedplus
 
-"syntax enable
-"set background=dark
-"colorscheme solarized
-"let g:solarized_termcolors=256
-colorscheme ron
+syntax enable
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+"colorscheme ron
 
 set completeopt=menu
 
@@ -220,3 +221,7 @@ let g:airline_theme='solarized'
 
 "let g:airline_theme='dark'
 "let g:airline_solarized_bg='light'
+let g:airline_solarized_bg='dark'
+let g:airline#extensions#tabline#enabled = 1
+
+let g:DirDiffEnableMappings = 1
