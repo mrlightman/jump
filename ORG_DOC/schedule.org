@@ -66,11 +66,21 @@ system("sysctl -w net.ipv4.conf.ppp3.rp_filter=0");
 
 - pptp
   - /etc/ppp/peer/vpn.pptp3 目录下 pptp 文件
-  
-  - option /appfs/etc/ppp/option.pptp
-  
-  - pppoe-setup username passwd
-  
+#+BEGIN_SRC shell
+pty "pptp 61.164.56.178 --nolaunchpppd"
+noauth
+refuse-eap
+require-mppe-128
+name lianlianbox
+password lianlianbox
+unit 20
+remotename lianlianvpn
+ipparam lianlianvpn
+linkname lianlianvpn
+usepeerdns
+file /appfs/etc/ppp/options.pptp
+#+END_SRC
+
   - pon /poff
 
 - l2tp
@@ -84,14 +94,13 @@ system("sysctl -w net.ipv4.conf.ppp3.rp_filter=0");
 
   - echo "c xx" >/var/run/xl2tpd/l2tp-control
 
- 
- 
-
-
 ** TODO 连连 ssh key 支持
 ** TODO 连连 php 脚本支持 redirect url
 ** TODO 连连中广视频业务
 ** TODO 连连删除文件功能失效
+** 连连视频限速
+- user 增加额外字段保存用户信息
+- must_redirect_list 新增 5 用户处理视频的 url
 ** 连连 3x3 的版本
 - ta55
 #+BEGIN_EXAMPLE
